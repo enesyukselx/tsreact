@@ -4,26 +4,42 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
+    interface INavLink {
+        name: string;
+        path: string;
+    }
+
+    const navLinks: INavLink[] = [
+        {
+            name: "Home",
+            path: "/",
+        },
+        {
+            name: "Page 1",
+            path: "/page1",
+        },
+        {
+            name: "Page 2",
+            path: "/page2",
+        },
+    ];
+
     return (
         <Navbar bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand>React</Navbar.Brand>
                 <Nav className="me-auto gap-2">
-                    <Nav.Item>
-                        <NavLink className="nav-link" to="/">
-                            Home
-                        </NavLink>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <NavLink className="nav-link" to="/page1">
-                            Page 1
-                        </NavLink>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <NavLink className="nav-link" to="/page2">
-                            Page 2
-                        </NavLink>
-                    </Nav.Item>
+                    {navLinks.map((link, index) => (
+                        <Nav.Item key={index}>
+                            <NavLink
+                                key={index}
+                                className="nav-link"
+                                to={link.path}
+                            >
+                                {link.name}
+                            </NavLink>
+                        </Nav.Item>
+                    ))}
                 </Nav>
             </Container>
         </Navbar>
