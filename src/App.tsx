@@ -1,3 +1,4 @@
+import React from "react";
 import {
     Outlet,
     Link,
@@ -10,7 +11,10 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import "./App.css";
-import ErrorBoundary from "./Pages/ErrorBoundary/ErrorBoundary";
+
+const ErrorBoundary = React.lazy(
+    () => import("./Pages/ErrorBoundary/ErrorBoundary")
+);
 
 const router = createBrowserRouter([
     {
