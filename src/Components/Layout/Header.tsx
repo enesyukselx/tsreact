@@ -2,6 +2,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+import UserContext from "../UserContext/UserContext";
+import { useContext } from "react";
 
 const Header = () => {
     interface INavLink {
@@ -19,6 +21,8 @@ const Header = () => {
             path: "/page2",
         },
     ];
+
+    const { isLogin } = useContext(UserContext);
 
     return (
         <Navbar
@@ -46,15 +50,22 @@ const Header = () => {
                         ))}
                     </Nav>
                     <Nav>
-                        <NavLink className="nav-link" to="/logout">
-                            Logout
-                        </NavLink>
-                        <NavLink className="nav-link" to="/logout">
-                            Login
-                        </NavLink>
-                        <NavLink className="nav-link" to="/account">
-                            Account
-                        </NavLink>
+                        {isLogin && (
+                            <>
+                                <NavLink className="nav-link" to="/logout">
+                                    Logout
+                                </NavLink>
+
+                                <NavLink className="nav-link" to="/account">
+                                    Account
+                                </NavLink>
+                            </>
+                        )}
+                        {!isLogin && (
+                            <NavLink className="nav-link" to="/login">
+                                Login
+                            </NavLink>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
