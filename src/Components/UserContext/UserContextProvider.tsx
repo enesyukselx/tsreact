@@ -8,6 +8,10 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
     const [creditCards, setCreditCards] = useState<creditCard[] | undefined>(
         undefined
     );
+    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [modelContent, setModelContent] = useState<ReactNode | undefined>(
+        <div>Loading</div>
+    );
 
     const login = (user: User) => {
         setIsLogin(true);
@@ -30,6 +34,10 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setCreditCards(creditCards?.filter((c) => c.id !== creditCard.id));
     };
 
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
+
     const values = {
         isLogin,
         user,
@@ -38,6 +46,10 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         logout,
         addCreditCard,
         removeCreditCard,
+        isModalOpen,
+        toggleModal,
+        modelContent,
+        setModelContent,
     };
 
     return (

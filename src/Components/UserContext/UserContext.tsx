@@ -9,6 +9,9 @@ const UserContext = React.createContext<{
     logout: () => void;
     addCreditCard: (creditCard: creditCard) => void;
     removeCreditCard: (creditCard: creditCard) => void;
+    isModalOpen: boolean;
+    toggleModal: () => void;
+    modelContent: React.ReactNode | undefined;
 }>({
     isLogin: false,
     user: undefined,
@@ -17,6 +20,9 @@ const UserContext = React.createContext<{
     logout: () => {},
     addCreditCard: () => {},
     removeCreditCard: () => {},
+    isModalOpen: false,
+    toggleModal: () => {},
+    modelContent: undefined,
 });
 
 export default UserContext;
