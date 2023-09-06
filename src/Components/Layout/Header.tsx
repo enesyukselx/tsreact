@@ -11,10 +11,6 @@ const Header = () => {
 
     const navLinks: INavLink[] = [
         {
-            name: "Home",
-            path: "/",
-        },
-        {
             name: "Page 1",
             path: "/page1",
         },
@@ -25,22 +21,39 @@ const Header = () => {
     ];
 
     return (
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar
+            bg="dark"
+            data-bs-theme="dark"
+            collapseOnSelect
+            expand="lg"
+            className="bg-body-tertiary"
+        >
             <Container>
-                <Navbar.Brand>React</Navbar.Brand>
-                <Nav className="me-auto gap-2">
-                    {navLinks.map((link, index) => (
-                        <Nav.Item key={index}>
+                <NavLink className="navbar-brand" to="/">
+                    React-Bootstrap
+                </NavLink>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="me-auto">
+                        {navLinks.map((link: INavLink, index: number) => (
                             <NavLink
-                                key={index}
                                 className="nav-link"
                                 to={link.path}
+                                key={index}
                             >
                                 {link.name}
                             </NavLink>
-                        </Nav.Item>
-                    ))}
-                </Nav>
+                        ))}
+                    </Nav>
+                    <Nav>
+                        <NavLink className="nav-link" to="/logout">
+                            More deets
+                        </NavLink>
+                        <NavLink className="nav-link" to="/account">
+                            Dank memes
+                        </NavLink>
+                    </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );
