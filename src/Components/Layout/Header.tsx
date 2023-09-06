@@ -47,10 +47,13 @@ const Header = () => {
                     </Nav>
                     <Nav>
                         <NavLink className="nav-link" to="/logout">
-                            More deets
+                            Logout
+                        </NavLink>
+                        <NavLink className="nav-link" to="/logout">
+                            Login
                         </NavLink>
                         <NavLink className="nav-link" to="/account">
-                            Dank memes
+                            Account
                         </NavLink>
                     </Nav>
                 </Navbar.Collapse>

@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import UserContextProvider from "./Components/UserContext/UserContextProvider";
 
+import Home from "./Pages/Home/Home";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -15,7 +17,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <div>Home</div>,
+                element: <Home />,
             },
             {
                 path: "page1",
