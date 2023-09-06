@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
+import UserContextProvider from "./Components/UserContext/UserContextProvider";
 
 const router = createBrowserRouter([
     {
@@ -30,10 +31,12 @@ const router = createBrowserRouter([
 
 export function AppContainer() {
     return (
-        <Layout>
-            <Outlet />
-            <ToastContainer position="bottom-right" theme="dark" />
-        </Layout>
+        <UserContextProvider>
+            <Layout>
+                <Outlet />
+                <ToastContainer position="bottom-right" theme="dark" />
+            </Layout>
+        </UserContextProvider>
     );
 }
 
