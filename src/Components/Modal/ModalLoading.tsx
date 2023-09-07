@@ -1,11 +1,10 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { useContext } from "react";
-import ModalContext from "../ModalContext/ModalContext";
 import { Spinner } from "react-bootstrap";
+import useModal from "../../Hooks/useModal";
 
 const ModalLoading = () => {
-    const { toggleModal } = useContext(ModalContext);
+    const { toggleModal } = useModal();
 
     return (
         <>

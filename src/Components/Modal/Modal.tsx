@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import Modal from "react-bootstrap/Modal";
-import ModalContext from "../ModalContext/ModalContext";
+import useModal from "../../Hooks/useModal";
 
 const ModalScreen = () => {
-    const { isModalOpen, toggleModal, modelContent } = useContext(ModalContext);
+    const { isModalOpen, toggleModal, modelContent } = useModal();
 
     return (
         <Modal show={isModalOpen} onHide={toggleModal}>
