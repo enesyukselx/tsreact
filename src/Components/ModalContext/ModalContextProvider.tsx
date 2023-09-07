@@ -14,6 +14,7 @@ const ModalContextProvider = ({ children }: { children: ReactNode }) => {
 
     const setContent = (Content: ReactNode) => {
         toggleModal();
+        setModelContent(<ModalLoading />);
         setTimeout(() => {
             setModelContent(Content);
             toggleModal();
