@@ -55,12 +55,12 @@ const Header = () => {
                     <Nav>
                         {isLogin && (
                             <>
-                                <NavLink className="nav-link" to="/logout">
-                                    Logout
-                                </NavLink>
-
                                 <NavLink className="nav-link" to="/account">
                                     Account
+                                </NavLink>
+
+                                <NavLink className="nav-link" to="/logout">
+                                    Logout
                                 </NavLink>
                             </>
                         )}
