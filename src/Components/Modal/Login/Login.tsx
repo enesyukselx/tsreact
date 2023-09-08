@@ -1,6 +1,10 @@
 import { Form, Button } from "react-bootstrap";
 import { useForm, Resolver } from "react-hook-form";
 import useModal from "../../../Hooks/useModal";
+import useUser from "../../../Hooks/useUser";
+import { toast } from "react-toastify";
+
+import { users } from "../../../dummydatas/data";
 
 type FormValues = {
     email: string;
@@ -37,8 +41,26 @@ const Login = () => {
 
     const { toggleModal } = useModal();
 
+    const { login } = useUser();
+
     const onSubmit = async (data: FormValues) => {
-        console.log(data);
+        const isSuccess = users.find((user) => {
+            if (user.email === data.email && user.password === data.password) {
+                toast.success("Login success", {
+                    theme: "dark",
+                });
+                login(user);
+
+                return true;
+            }
+            return false;
+        });
+        if (!isSuccess) {
+            toast.error("Login failed", {
+                theme: "dark",
+            });
+            return;
+        }
         toggleModal();
     };
 
