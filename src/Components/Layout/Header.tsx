@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import UserContext from "../UserContext/UserContext";
-import { useContext } from "react";
+import useModal from "../../Hooks/useModal";
+import Login from "../Modal/Login/Login";
 
 const Header = () => {
     interface INavLink {
@@ -23,6 +25,7 @@ const Header = () => {
     ];
 
     const { isLogin } = useContext(UserContext);
+    const { setTitle, setContent } = useModal();
 
     return (
         <Navbar
@@ -62,9 +65,16 @@ const Header = () => {
                             </>
                         )}
                         {!isLogin && (
-                            <NavLink className="nav-link" to="/login">
+                            <Nav.Link
+                                onClick={() => {
+                                    if (setContent && setTitle) {
+                                        setTitle("Login");
+                                        setContent(<Login />);
+                                    }
+                                }}
+                            >
                                 Login
-                            </NavLink>
+                            </Nav.Link>
                         )}
                     </Nav>
                 </Navbar.Collapse>
