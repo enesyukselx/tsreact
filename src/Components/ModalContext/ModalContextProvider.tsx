@@ -4,7 +4,8 @@ import ModalLoading from "../Modal/ModalLoading";
 
 const ModalContextProvider = ({ children }: { children: ReactNode }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modelContent, setModelContent] = useState<ReactNode | undefined>(
+    const [modalTitle, setModalTitle] = useState<string | undefined>(" ");
+    const [modalContent, setModalContent] = useState<ReactNode | undefined>(
         <ModalLoading />
     );
 
@@ -12,13 +13,17 @@ const ModalContextProvider = ({ children }: { children: ReactNode }) => {
         setIsModalOpen(!isModalOpen);
     };
 
+    const setTitle = (title: string) => {
+        setModalTitle(title);
+    };
+
     const setContent = (Content: ReactNode) => {
         toggleModal();
-        setModelContent(<ModalLoading />);
+        setModalContent(<ModalLoading />);
         setTimeout(() => {
-            setModelContent(Content);
+            setModalContent(Content);
             toggleModal();
-        }, 300);
+        }, 500);
     };
 
     return (
@@ -26,7 +31,9 @@ const ModalContextProvider = ({ children }: { children: ReactNode }) => {
             value={{
                 isModalOpen,
                 toggleModal,
-                modelContent,
+                modalTitle,
+                setTitle,
+                modalContent,
                 setContent,
             }}
         >

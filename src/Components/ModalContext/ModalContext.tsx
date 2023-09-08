@@ -3,14 +3,18 @@ import React from "react";
 interface IModalContext {
     isModalOpen: boolean;
     toggleModal: () => void;
-    modelContent: React.ReactNode | undefined;
+    modalTitle?: string;
+    setTitle?: (title: string) => void;
+    modalContent: React.ReactNode | undefined;
     setContent?: (Content: React.ReactNode) => void;
 }
 
 const ModalContext = React.createContext<IModalContext>({
     isModalOpen: false,
     toggleModal: () => {},
-    modelContent: undefined,
+    modalTitle: undefined,
+    setTitle: () => {},
+    modalContent: undefined,
     setContent: () => {},
 });
 
