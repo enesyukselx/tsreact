@@ -14,6 +14,6 @@ export type creditCard = {
     id: number;
     userId: number;
     number: string;
-    cvv: string;
+    cvc: string;
     expirationDate: string;
 };
