@@ -1,9 +1,12 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import useUser from "../../../Hooks/useUser";
+import useModal from "../../../Hooks/useModal";
+import EditDetails from "../../../Components/Modal/EditDetails/EditDetails";
 
 const UserDetails = () => {
     const { user } = useUser();
+    const { setContent, setTitle } = useModal();
 
     return (
         <>
@@ -29,7 +32,16 @@ const UserDetails = () => {
                 </ListGroup.Item>
             </ListGroup>
             <div className="d-grid gap-2 mt-3">
-                <Button variant="primary" size="lg">
+                <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={() => {
+                        if (setTitle && setContent) {
+                            setTitle("Edit Details");
+                            setContent(<EditDetails />);
+                        }
+                    }}
+                >
                     Edit Details
                 </Button>
             </div>
