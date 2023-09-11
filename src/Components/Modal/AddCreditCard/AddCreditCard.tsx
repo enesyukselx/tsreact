@@ -31,19 +31,17 @@ const AddCreditCard = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: zodResolver(schema) });
+    } = useForm<IFormValues>({ resolver: zodResolver(schema) });
 
     const onSubmit = (data: IFormValues): void => {
-        const newCard = {
+        addCreditCard({
             id: Math.floor(Math.random() * 1000),
-            userId: user?.id,
+            userId: user!.id,
             cvc: data.cvc,
             expirationDate: data.expiry,
             name: data.name,
             number: data.number,
-        };
-
-        addCreditCard(newCard);
+        });
         toggleModal();
         toast.success("Credit card added successfully");
     };
@@ -56,12 +54,12 @@ const AddCreditCard = () => {
         number: "",
     });
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setState((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleInputFocus = (e) => {
+    const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         setState((prev) => ({ ...prev, focus: e.target.name }));
     };
 

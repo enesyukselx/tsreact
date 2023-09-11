@@ -8,7 +8,7 @@ import { z, ZodType } from "zod";
 
 interface IFormValues {
     email: string;
-    age: string;
+    age: number;
     city: string;
     country: string;
 }
@@ -16,7 +16,7 @@ interface IFormValues {
 const EditDetails = () => {
     const schema: ZodType<IFormValues> = z.object({
         email: z.string().email(),
-        age: z.string().min(1).max(3),
+        age: z.number().min(1).max(3),
         city: z.string().min(1).max(50),
         country: z.string().min(1).max(50),
     });
@@ -25,25 +25,24 @@ const EditDetails = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: zodResolver(schema) });
+    } = useForm<IFormValues>({ resolver: zodResolver(schema) });
 
     const { user, updateUser } = useUser();
     const { toggleModal } = useModal();
 
     const onSubmit = (data: IFormValues): void => {
-        const updatedUser = {
-            id: user?.id,
-            name: user?.name,
+        updateUser({
+            id: user!.id,
+            name: user!.name,
             email: data.email,
-            password: user?.password,
+            password: user!.password,
             details: {
                 age: data.age,
                 city: data.city,
                 country: data.country,
             },
-        };
+        });
 
-        updateUser(updatedUser);
         toast.success("User updated successfully");
         toggleModal();
     };
