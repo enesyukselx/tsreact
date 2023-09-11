@@ -25,21 +25,28 @@ const users: User[] = [
     },
 ];
 
-const creditCards: creditCard[] = [
-    {
-        id: 1,
-        userId: 1,
-        number: "1234 1234 1234 1234",
-        cvv: "123",
-        expirationDate: "12/22",
-    },
+const cards: creditCard[] = [
     {
         id: 2,
         userId: 2,
-        number: "5678 5678 5678 5678",
+        number: "5678 5678 5678 5671",
+        cvv: "456",
+        expirationDate: "12/22",
+    },
+    {
+        id: 3,
+        userId: 2,
+        number: "5678 5678 5678 5672",
+        cvv: "456",
+        expirationDate: "12/22",
+    },
+    {
+        id: 4,
+        userId: 2,
+        number: "5678 5678 5678 5673",
         cvv: "456",
         expirationDate: "12/22",
     },
 ];
 
-export { users, creditCards };
+export { users, cards };

@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import UserContext from "./UserContext";
 import { User, creditCard } from "../../dummydatas/types";
+import { cards } from "../../dummydatas/data";
 
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
     const [isLogin, setIsLogin] = useState(false);
@@ -11,12 +12,17 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
     const login = (user: User) => {
         setIsLogin(true);
+        setCreditCards(cards);
         setUser(user);
     };
 
     const logout = () => {
         setIsLogin(false);
         setUser(undefined);
+    };
+
+    const getUserCreditCards = (userId: number) => {
+        return creditCards?.filter((c) => c.userId === userId);
     };
 
     const addCreditCard = (creditCard: creditCard) => {
@@ -36,6 +42,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         creditCards,
         login,
         logout,
+        getUserCreditCards,
         addCreditCard,
         removeCreditCard,
     };

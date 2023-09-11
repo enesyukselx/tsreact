@@ -7,6 +7,7 @@ const UserContext = React.createContext<{
     creditCards: creditCard[] | undefined;
     login: (user: User) => void;
     logout: () => void;
+    getUserCreditCards: (userId: number) => creditCard[] | undefined;
     addCreditCard: (creditCard: creditCard) => void;
     removeCreditCard: (creditCard: creditCard) => void;
 }>({
@@ -15,6 +16,7 @@ const UserContext = React.createContext<{
     creditCards: undefined,
     login: () => {},
     logout: () => {},
+    getUserCreditCards: () => undefined,
     addCreditCard: () => {},
     removeCreditCard: () => {},
 });

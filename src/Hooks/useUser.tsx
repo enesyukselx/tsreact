@@ -8,6 +8,7 @@ const useUser = () => {
         creditCards,
         login,
         logout,
+        getUserCreditCards,
         addCreditCard,
         removeCreditCard,
     } = useContext(UserContext);
@@ -17,6 +18,7 @@ const useUser = () => {
         creditCards,
         login,
         logout,
+        getUserCreditCards,
         addCreditCard,
         removeCreditCard,
     };
