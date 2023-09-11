@@ -21,6 +21,10 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         setUser(undefined);
     };
 
+    const updateUser = (user: User) => {
+        setUser(user);
+    };
+
     const getUserCreditCards = (userId: number) => {
         return creditCards?.filter((c) => c.userId === userId);
     };
@@ -42,6 +46,7 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         creditCards,
         login,
         logout,
+        updateUser,
         getUserCreditCards,
         addCreditCard,
         removeCreditCard,
