@@ -14,6 +14,7 @@ interface IFormValues {
     expiry: string;
     name: string;
     number: string;
+    focused?: "name" | "number" | "expiry" | "cvc" | "";
 }
 
 const AddCreditCard = () => {
@@ -46,12 +47,12 @@ const AddCreditCard = () => {
         toast.success("Credit card added successfully");
     };
 
-    const [state, setState] = useState({
+    const [state, setState] = useState<IFormValues>({
         cvc: "",
         expiry: "",
-        focus: "",
         name: "",
         number: "",
+        focused: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +71,7 @@ const AddCreditCard = () => {
                 expiry={state.expiry}
                 cvc={state.cvc}
                 name={state.name}
-                focused={state.focus}
+                focused={state.focused}
             />
             <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
                 <Form.Group
