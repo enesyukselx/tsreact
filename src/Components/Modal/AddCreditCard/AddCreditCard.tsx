@@ -8,13 +8,14 @@ import { Form, Button } from "react-bootstrap";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodType } from "zod";
 import { toast } from "react-toastify";
+import inputFormat from "../../../Utils/inputformat";
 
 interface IFormValues {
     cvc: string;
     expiry: string;
     name: string;
     number: string;
-    focused?: "name" | "number" | "expiry" | "cvc" | "";
+    focus?: "name" | "number" | "expiry" | "cvc" | "";
 }
 
 const AddCreditCard = () => {
@@ -23,9 +24,9 @@ const AddCreditCard = () => {
 
     const schema: ZodType<IFormValues> = z.object({
         cvc: z.string().min(3).max(3),
-        expiry: z.string().min(4).max(4),
+        expiry: z.string().min(5).max(5),
         name: z.string().min(1).max(50),
-        number: z.string().min(16).max(16),
+        number: z.string().min(19).max(19),
     });
 
     const {
@@ -52,12 +53,15 @@ const AddCreditCard = () => {
         expiry: "",
         name: "",
         number: "",
-        focused: "",
+        focus: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setState((prev) => ({ ...prev, [name]: value }));
+        if (name === "number" && value.length > 19) return;
+        if (name === "expiry" && value.length > 5) return;
+        if (name === "cvc" && value.length > 3) return;
+        setState((prev) => ({ ...prev, [name]: inputFormat(name, value) }));
     };
 
     const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -71,7 +75,7 @@ const AddCreditCard = () => {
                 expiry={state.expiry}
                 cvc={state.cvc}
                 name={state.name}
-                focused={state.focused}
+                focused={state.focus}
             />
             <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
                 <Form.Group
@@ -81,7 +85,7 @@ const AddCreditCard = () => {
                     <Form.Label>Card Number</Form.Label>
                     <Form.Control
                         {...register("number")}
-                        type="number"
+                        type="text"
                         name="number"
                         placeholder="Card Number"
                         value={state.number}
@@ -103,7 +107,7 @@ const AddCreditCard = () => {
                     <Form.Label>Expiry Date (MM/YY)</Form.Label>
                     <Form.Control
                         {...register("expiry")}
-                        type="number"
+                        type="text"
                         name="expiry"
                         placeholder="MM/YY"
                         value={state.expiry}
@@ -125,7 +129,7 @@ const AddCreditCard = () => {
                     <Form.Label>CVC</Form.Label>
                     <Form.Control
                         {...register("cvc")}
-                        type="number"
+                        type="text"
                         name="cvc"
                         placeholder="CVC"
                         value={state.cvc}
