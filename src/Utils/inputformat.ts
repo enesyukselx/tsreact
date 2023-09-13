@@ -1,6 +1,4 @@
-type InputFormat = "name" | "number" | "cvc" | "expiry" | undefined;
-
-const inputFormat = (type: InputFormat, value: string) => {
+const inputFormat = (type: string, value: string) => {
     if (type === "number") {
         if (
             value?.length === 4 ||

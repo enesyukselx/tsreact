@@ -10,12 +10,14 @@ import { z, ZodType } from "zod";
 import { toast } from "react-toastify";
 import inputFormat from "../../../Utils/inputformat";
 
+type Focused = "name" | "number" | "expiry" | "cvc" | "";
+
 interface IFormValues {
     cvc: string;
     expiry: string;
     name: string;
     number: string;
-    focus?: "name" | "number" | "expiry" | "cvc" | "";
+    focused?: Focused;
 }
 
 const AddCreditCard = () => {
@@ -25,8 +27,8 @@ const AddCreditCard = () => {
     const schema: ZodType<IFormValues> = z.object({
         cvc: z.string().min(3).max(3),
         expiry: z.string().min(5).max(5),
-        name: z.string().min(1).max(50),
         number: z.string().min(19).max(19),
+        name: z.string().min(1).max(50),
     });
 
     const {
@@ -53,7 +55,7 @@ const AddCreditCard = () => {
         expiry: "",
         name: "",
         number: "",
-        focus: "",
+        focused: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +67,8 @@ const AddCreditCard = () => {
     };
 
     const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        setState((prev) => ({ ...prev, focus: e.target.name }));
+        const name = e.target.name as Focused;
+        setState((prev) => ({ ...prev, focused: name }));
     };
 
     return (
@@ -75,7 +78,7 @@ const AddCreditCard = () => {
                 expiry={state.expiry}
                 cvc={state.cvc}
                 name={state.name}
-                focused={state.focus}
+                focused={state.focused}
             />
             <Form onSubmit={handleSubmit(onSubmit)} className="mt-4">
                 <Form.Group
