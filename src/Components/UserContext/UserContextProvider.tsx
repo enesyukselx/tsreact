@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import UserContext from "./UserContext";
 import { User, creditCard } from "../../dummydatas/types";
 import { cards } from "../../dummydatas/data";
@@ -10,15 +10,26 @@ const UserContextProvider = ({ children }: { children: ReactNode }) => {
         undefined
     );
 
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (user) {
+            const userObj = JSON.parse(user);
+            setUser(userObj);
+            setIsLogin(true);
+        }
+    }, []);
+
     const login = (user: User) => {
         setIsLogin(true);
         setCreditCards(cards);
         setUser(user);
+        localStorage.setItem("user", JSON.stringify(user));
     };
 
     const logout = () => {
         setIsLogin(false);
         setUser(undefined);
+        localStorage.removeItem("user");
     };
 
     const updateUser = (user: User) => {
